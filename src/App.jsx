@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
 import DashboardLayout from './layouts/DashboardLayout';
 import DashboardPage from './pages/DashboardPage';
+import CampaignsPage from './pages/CampaignsPage';
+import CampaignDetailPage from './pages/CampaignDetailPage';
 
 function Placeholder({ title }) {
-  return <h2 className="text-2xl font-bold text-gray-800">{title}</h2>;
+  return <h2 className="text-2xl font-bold text-slate-800">{title}</h2>;
 }
 
 function App() {
@@ -12,7 +14,8 @@ function App() {
       <DashboardLayout>
         <Routes>
           <Route path="/" element={<DashboardPage />} />
-          <Route path="/ads" element={<Placeholder title="광고 관리" />} />
+          <Route path="/campaigns" element={<CampaignsPage />} />
+          <Route path="/campaigns/:campaignId" element={<CampaignDetailPage />} />
           <Route path="/reports" element={<Placeholder title="리포트" />} />
         </Routes>
       </DashboardLayout>
