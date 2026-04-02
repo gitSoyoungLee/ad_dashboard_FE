@@ -3,10 +3,7 @@ import DashboardLayout from './layouts/DashboardLayout';
 import DashboardPage from './pages/DashboardPage';
 import CampaignsPage from './pages/CampaignsPage';
 import CampaignDetailPage from './pages/CampaignDetailPage';
-
-function Placeholder({ title }) {
-  return <h2 className="text-2xl font-bold text-slate-800">{title}</h2>;
-}
+import DataPage from './pages/DataPage';
 
 function App() {
   return (
@@ -16,7 +13,7 @@ function App() {
           <Route path="/" element={<DashboardPage />} />
           <Route path="/campaigns" element={<CampaignsPage />} />
           <Route path="/campaigns/:campaignId" element={<CampaignDetailPage />} />
-          <Route path="/reports" element={<Placeholder title="리포트" />} />
+          <Route path="/data" element={<DataPage />} />
         </Routes>
       </DashboardLayout>
     </BrowserRouter>

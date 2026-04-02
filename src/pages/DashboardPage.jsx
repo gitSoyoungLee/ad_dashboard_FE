@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { fetchSummary, fetchTrends } from '../api/dashboard';
+import { syncMeta } from '../api/sync';
 import SummaryCard from '../components/SummaryCard';
 import TrendChart from '../components/TrendChart';
 import Spinner from '../components/Spinner';
@@ -29,6 +30,8 @@ function DashboardPage() {
   const [trends, setTrends] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [syncing, setSyncing] = useState(false);
+  const [syncMsg, setSyncMsg] = useState(null);
 
   const loadData = useCallback(() => {
     if (!startDate || !endDate) return;
@@ -61,6 +64,21 @@ function DashboardPage() {
   useEffect(() => {
     loadData();
   }, [loadData]);
+
+  const handleSync = () => {
+    setSyncing(true);
+    setSyncMsg(null);
+    syncMeta(startDate, endDate)
+      .then((res) => {
+        const body = res.data.data ?? res.data;
+        setSyncMsg({ type: 'success', text: body.message });
+        loadData();
+      })
+      .catch((err) => {
+        setSyncMsg({ type: 'error', text: err.response?.data?.message || '동기화에 실패했습니다.' });
+      })
+      .finally(() => setSyncing(false));
+  };
 
   return (
     <div className="space-y-8">
@@ -95,6 +113,34 @@ function DashboardPage() {
         <div className="text-center py-20 text-red-500">{error}</div>
       ) : (
         <>
+          {/* Sync Section */}
+          <div className="flex items-center gap-3 flex-wrap">
+            <button
+              onClick={handleSync}
+              disabled={syncing}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              {syncing ? (
+                <>
+                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                  동기화 중...
+                </>
+              ) : (
+                <>
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182M2.985 19.644l3.181-3.183" />
+                  </svg>
+                  Meta 동기화
+                </>
+              )}
+            </button>
+            {syncMsg && (
+              <span className={`text-sm ${syncMsg.type === 'success' ? 'text-emerald-600' : 'text-red-500'}`}>
+                {syncMsg.text}
+              </span>
+            )}
+          </div>
+
           {summary && (
             <>
               <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-6 gap-4">
