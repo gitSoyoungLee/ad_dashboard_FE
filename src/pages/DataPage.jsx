@@ -1,17 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { fetchUsers, fetchLeads, syncMeta } from '../api/sync';
+import { fetchUsers, fetchLeads } from '../api/sync';
 import Spinner from '../components/Spinner';
-
-function toISODate(date) {
-  return date.toISOString().slice(0, 10);
-}
-
-function getDefaultRange() {
-  const end = new Date();
-  const start = new Date();
-  start.setDate(end.getDate() - 6);
-  return { startDate: toISODate(start), endDate: toISODate(end) };
-}
 
 const TABS = [
   { key: 'users', label: '가입자 (Users)' },
@@ -26,14 +15,7 @@ const LEAD_STATUS_OPTIONS = [
 ];
 
 function DataPage() {
-  const defaults = getDefaultRange();
   const [tab, setTab] = useState('users');
-
-  // sync state
-  const [syncStart, setSyncStart] = useState(defaults.startDate);
-  const [syncEnd, setSyncEnd] = useState(defaults.endDate);
-  const [syncing, setSyncing] = useState(false);
-  const [syncMsg, setSyncMsg] = useState(null);
 
   // users state
   const [users, setUsers] = useState([]);
@@ -71,74 +53,12 @@ function DataPage() {
     else loadLeads();
   }, [tab, loadUsers, loadLeads]);
 
-  const handleSync = () => {
-    setSyncing(true);
-    setSyncMsg(null);
-    syncMeta(syncStart, syncEnd)
-      .then((res) => {
-        const body = res.data.data ?? res.data;
-        setSyncMsg({ type: 'success', text: body.message });
-        if (tab === 'users') loadUsers();
-        else loadLeads();
-      })
-      .catch((err) => {
-        setSyncMsg({ type: 'error', text: err.response?.data?.message || '동기화에 실패했습니다.' });
-      })
-      .finally(() => setSyncing(false));
-  };
-
   return (
     <div className="space-y-8">
       {/* Header */}
       <div>
         <h2 className="text-2xl font-bold text-slate-800">데이터 관리</h2>
-        <p className="text-sm text-slate-400 mt-1">Meta 동기화 및 로우 데이터를 조회합니다</p>
-      </div>
-
-      {/* Sync Section */}
-      <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-4">
-        <h3 className="text-sm font-semibold text-slate-700">Meta 데이터 동기화</h3>
-        <div className="flex items-center gap-3 flex-wrap">
-          <div className="flex items-center gap-2 bg-slate-50 rounded-lg border border-slate-200 px-3 py-2">
-            <input
-              type="date"
-              value={syncStart}
-              onChange={(e) => setSyncStart(e.target.value)}
-              className="text-sm text-slate-600 focus:outline-none bg-transparent"
-            />
-            <span className="text-slate-300">—</span>
-            <input
-              type="date"
-              value={syncEnd}
-              onChange={(e) => setSyncEnd(e.target.value)}
-              className="text-sm text-slate-600 focus:outline-none bg-transparent"
-            />
-          </div>
-          <button
-            onClick={handleSync}
-            disabled={syncing}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
-            {syncing ? (
-              <>
-                <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-                동기화 중...
-              </>
-            ) : (
-              <>
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182M2.985 19.644l3.181-3.183" />
-                </svg>
-                동기화 실행
-              </>
-            )}
-          </button>
-        </div>
-        {syncMsg && (
-          <p className={`text-sm ${syncMsg.type === 'success' ? 'text-emerald-600' : 'text-red-500'}`}>
-            {syncMsg.text}
-          </p>
-        )}
+        <p className="text-sm text-slate-400 mt-1">로우 데이터를 조회합니다</p>
       </div>
 
       {/* Tabs */}
