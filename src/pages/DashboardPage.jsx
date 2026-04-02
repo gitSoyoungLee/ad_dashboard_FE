@@ -105,10 +105,10 @@ function DashboardPage() {
                   tooltip="Meta 광고 플랫폼에서 집행된 총 광고비 합산 금액"
                 />
                 <SummaryCard
-                  title="총 유입 수"
+                  title="전환 수"
                   value={summary.totalInbound?.toLocaleString()}
                   unit="회"
-                  tooltip="광고를 통해 사이트로 유입된 총 클릭 수 (Meta Clicks 합산)"
+                  tooltip="기간 내 신규 전환된 고객 수 (회원가입 수 + 유효 리드 수)"
                 />
                 <SummaryCard
                   title="회원가입 수"
@@ -125,13 +125,13 @@ function DashboardPage() {
                 <SummaryCard
                   title="통합 CAC"
                   value={summary.totalCac?.toLocaleString()}
-                  unit="원"
+                  unit="$"
                   tooltip="유저 1명을 획득하는 데 든 비용 (총 지출액 ÷ 회원가입 수)"
                 />
                 <SummaryCard
                   title="리드 CPA"
                   value={summary.leadCpa?.toLocaleString()}
-                  unit="원"
+                  unit="$"
                   tooltip="유효 리드 1건을 획득하는 데 든 비용 (총 지출액 ÷ 유효 리드 수)"
                 />
               </div>
