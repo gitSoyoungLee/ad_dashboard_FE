@@ -14,6 +14,9 @@
 
 Meta 광고 지출 데이터와 내부 전환 데이터를 통합하여 실질적인 광고 효율(CPA) 및 리드 가치를 분석하는 대시보드의 **프론트엔드 애플리케이션**입니다.
 
+<img width="1918" height="837" alt="image" src="https://github.com/user-attachments/assets/5bcc0c97-0bbe-4b6b-9d37-b73b255fb25e" />
+
+
 ## 프로젝트 배경
 
 Meta Ads Manager의 지출/결과 데이터와 서비스 내부의 가입/리드 데이터가 파편화되어 있어, 매일 수동으로 서로 다른 사이트에서 데이터를 확인하고 취합하는 비효율이 발생했습니다. 이 과정에서 리소스 낭비와 데이터 정합성 오류 가능성도 존재했습니다.
@@ -31,9 +34,16 @@ Meta Ads Manager의 지출/결과 데이터와 서비스 내부의 가입/리드
 - **Meta 동기화:** 버튼 클릭으로 최신 광고 성과 데이터를 즉시 동기화
 - **기간 필터:** 날짜 범위 선택을 통한 기간별 조회
 
+<img width="1918" height="837" alt="image" src="https://github.com/user-attachments/assets/7e77b3b1-1570-4149-9ccc-2531d2bfc1c6" />
+<img width="1564" height="595" alt="image 12" src="https://github.com/user-attachments/assets/c8928df7-c25c-4c5d-9205-eed9f92628da" />
+
+
 ### 2. 캠페인 성과 (Campaigns)
 
 광고 목적에 따라 서로 다른 KPI를 관리합니다.
+
+<img width="1605" height="416" alt="image" src="https://github.com/user-attachments/assets/9e0b52c3-ae50-45a2-bc79-d0ca1d7fa12a" />
+
 
 | 캠페인 유형    | 주요 지표                  | 표시 목적                     |
 |-----------|------------------------|---------------------------|
@@ -47,6 +57,8 @@ Meta Ads Manager의 지출/결과 데이터와 서비스 내부의 가입/리드
 ### 3. 데이터 관리 (Data)
 
 로우 데이터를 탭으로 구분하여 직접 조회합니다.
+
+<img width="1587" height="556" alt="image" src="https://github.com/user-attachments/assets/a71cd491-b666-4543-a476-9a7adda1eb86" />
 
 - **가입자 (Users):** UTM 소스/캠페인별 실제 가입자 목록
 - **리드 (Leads):** 상태별(NEW/VERIFIED/REJECTED) 필터링 조회
