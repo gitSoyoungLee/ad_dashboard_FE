@@ -31,12 +31,12 @@ Meta Ads Manager의 지출/결과 데이터와 서비스 내부의 가입/리드
 
 - **Summary Cards:** 총 지출액, 전환 수, 회원가입 수, 유효 리드 수, 통합 CAC, 리드 CPA
 - **시계열 추이 차트:** 최근 30일간 지출액, 노출수, 클릭수, 유입 수 추이 시각화
+- **AI 성과 분석:** 버튼 클릭으로 최근 7일 광고 성과를 AI가 진단 (종합 진단 · 소재별 진단 · 액션 아이템)
 - **Meta 동기화:** 버튼 클릭으로 최신 광고 성과 데이터를 즉시 동기화
 - **기간 필터:** 날짜 범위 선택을 통한 기간별 조회
 
 <img width="1918" height="837" alt="image" src="https://github.com/user-attachments/assets/7e77b3b1-1570-4149-9ccc-2531d2bfc1c6" />
 <img width="1564" height="595" alt="image 12" src="https://github.com/user-attachments/assets/c8928df7-c25c-4c5d-9205-eed9f92628da" />
-
 
 ### 2. 캠페인 성과 (Campaigns)
 
@@ -85,8 +85,10 @@ src/
 │   ├── client.js            # Axios 인스턴스 (baseURL, timeout)
 │   ├── dashboard.js         # 대시보드 통계 API
 │   ├── campaigns.js         # 캠페인/소재 성과 API
+│   ├── aiAnalysis.js        # AI 성과 분석 API
 │   └── sync.js              # 동기화/유저/리드 API
 ├── components/              # 공통 컴포넌트
+│   ├── AiAnalysisSection.jsx # AI 성과 분석 섹션
 │   ├── Navbar.jsx           # 상단 네비게이션 바
 │   ├── Sidebar.jsx          # 사이드바 메뉴
 │   ├── Spinner.jsx          # 로딩 스피너
@@ -116,6 +118,7 @@ src/
 | GET    | `/trends?endDate={}`                                   | 대시보드 차트      |
 | GET    | `/campaigns?startDate={}&endDate={}&type={}&sortBy={}` | 캠페인 목록       |
 | GET    | `/campaigns/{campaignId}/ads?startDate={}&endDate={}`  | 캠페인 상세       |
+| POST   | `/ai-analysis`                                         | 대시보드 AI 분석   |
 
 ### 리드/유저 API
 
