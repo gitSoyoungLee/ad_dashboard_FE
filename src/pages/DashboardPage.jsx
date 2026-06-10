@@ -4,6 +4,7 @@ import { syncMeta } from '../api/sync';
 import SummaryCard from '../components/SummaryCard';
 import TrendChart from '../components/TrendChart';
 import Spinner from '../components/Spinner';
+import AiAnalysisSection from '../components/AiAnalysisSection';
 
 function toISODate(date) {
   return date.toISOString().slice(0, 10);
@@ -190,6 +191,8 @@ function DashboardPage() {
           )}
 
           {trends && <TrendChart data={trends} />}
+
+          <AiAnalysisSection />
         </>
       )}
     </div>
