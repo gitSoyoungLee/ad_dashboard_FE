@@ -37,6 +37,8 @@ Meta Ads Manager의 지출/결과 데이터와 서비스 내부의 가입/리드
 
 <img width="1918" height="837" alt="image" src="https://github.com/user-attachments/assets/7e77b3b1-1570-4149-9ccc-2531d2bfc1c6" />
 <img width="1564" height="595" alt="image 12" src="https://github.com/user-attachments/assets/c8928df7-c25c-4c5d-9205-eed9f92628da" />
+<img width="1657" height="1282" alt="screencapture-localhost-5173-2026-06-10-14_21_14 - 복사본" src="https://github.com/user-attachments/assets/95d94d57-5796-47af-bd2d-521ebaded0ed" />
+
 
 ### 2. 캠페인 성과 (Campaigns)
 
